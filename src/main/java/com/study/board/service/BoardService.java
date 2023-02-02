@@ -1,7 +1,9 @@
 package com.study.board.service;
 
 import com.study.board.entity.Board;
+import com.study.board.entity.Member;
 import com.study.board.repository.BoardRepository;
+import com.study.board.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +21,7 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     //글작성
-    public void write(Board board , MultipartFile file) throws Exception{
+    public void write(Board board, MultipartFile file) throws Exception {
 
         String projectPath = System.getProperty("user.dir") + "/src/main/webapp/";
 
@@ -36,26 +38,25 @@ public class BoardService {
     }
 
     //게시글 list 처리
-    public Page<Board> boardList(Pageable pageable){
+    public Page<Board> boardList(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
 
-    public Page<Board> boardSearchList(String searchKeyword, Pageable pageable){
+    public Page<Board> boardSearchList(String searchKeyword, Pageable pageable) {
 
-        return boardRepository.findByTitleContaining(searchKeyword,pageable);
+        return boardRepository.findByTitleContaining(searchKeyword, pageable);
     }
 
     //특정 게시글 불러오기
-    public Board boardView(Integer id){
+    public Board boardView(Integer id) {
 
         return boardRepository.findById(id).get();
     }
 
     //특정 게시글 삭제
-    public void boardDelete(Integer id){
+    public void boardDelete(Integer id) {
 
         boardRepository.deleteById(id);
     }
-
 
 }
