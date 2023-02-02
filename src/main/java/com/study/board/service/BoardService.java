@@ -40,6 +40,11 @@ public class BoardService {
         return boardRepository.findAll(pageable);
     }
 
+    public Page<Board> boardSearchList(String searchKeyword, Pageable pageable){
+
+        return boardRepository.findByTitleContaining(searchKeyword,pageable);
+    }
+
     //특정 게시글 불러오기
     public Board boardView(Integer id){
 
@@ -47,9 +52,10 @@ public class BoardService {
     }
 
     //특정 게시글 삭제
-
     public void boardDelete(Integer id){
 
         boardRepository.deleteById(id);
     }
+
+
 }
